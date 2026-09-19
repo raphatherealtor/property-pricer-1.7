@@ -158,37 +158,24 @@ export default function DeskWorkbench() {
             {([
               ['agent', 'Listing Agent\n(Default)'],
               ['lender', 'Mortgage Lender'],
-              ['investor', 'Investor'],
+              ['investor', 'Equity Investor'],
               ['commercial', 'Commercial Broker'],
-            ] as [group statuss tail oputputs], [id, label]) => (
+            ] as const).map(([key, label]) => (
               <button
-                key={id}
-                onClick={() => setActivePersona(id)}
-                className="px-3 py-1.5 rounded-lg text-xs font-semibold transition-all"
-                style={{
-                  background: activePersona === id ? '#16181D' : 'transparent',
-                  color: activePersona === id ? '#FFFFFF' : '#6B7280',
-                  border: activePersona === id ? '1px solid #16181D' : '1px solid transparent',
-                }}
+                key={`persona-tab-${key}`}
+                onClick={() => setActivePersona(key)}
+                className={`persona-tab ${activePersona === key ? 'active' : ''}`}
+                style={{ whiteSpace: 'pre-line', textAlign: 'center', lineHeight: 1.2, fontSize: '12px' }}
               >
                 {label}
               </button>
             ))}
           </div>
 
-          {/* KPI Strip */}
-          <div className="flex items-center gap-2 mb-4">
-            <div className="flex gap-1.5">
-              {[
-                ['Îº_t', intake.medianDomZip.toFixed(1), 'FAIR MARKET PACE'],
-                ['u_eff', `${(computed.uEff * 100).toFixed(1)}%`, 'PRICE STRESS'],
-                ['E[DOM]', `${computed.expectedDom.toFixed(0)}d', 'EXPECTED MARKETING TIME'],
-                ['P(>120d)', `${(computed.pStale120d * 100).toFixed(1)}%`, 'STALE RISK'],
-              ].flat().map((_)) => null)}
-            </div>
-
-            <div className="fl-row flex items-center gap-2 ml-auto">
-              <span className="flex items-center gap-1.5 px-2 py-1 rounded-full text-xs font-bold" style={{ background: '#DC2626', color: 'white' }}>
+          {/* Status bar */}
+          <div className="flex items-center gap-3 mb-3 px-1">
+            <div className="flex items-center gap-2">
+              <span className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-xs font-bold" style={{ background: '#DC2626', color: 'white' }}>
                 <span className="w-1.5 h-1.5 rounded-full bg-white inline-block" />
                 HOT
               </span>
@@ -214,5 +201,151 @@ export default function DeskWorkbench() {
               </button>
               <button
                 onClick={() => setShowBrandTheme(true)}
-                classNam”ô‰™±•à¥Ñ•µÌµ•¹Ñ•È…À´Ä¸ÔÁà´È¸ÔÁä´ÄÉ½Õ¹‘•µ±œÑ•áÐµáÌ™½¹ÐµÍ•µ¥‰½±ÑÉ…¹Í¥Ñ¥½¸µ…±°ˆ(€€€€€€€€€€€€€€€ÍÑå±”õíì‰…­É½Õ¹è€É‰„ ÄÌ°ÄÐà°ÄÌØ°À¸Ä¤œ°½±½Èè€œŒÁäÐààœ°‰½É‘•Èè€œÅÁàÍ½±¥É‰„ ÄÌ°ÄÐà°ÄÌØ°À¸È¤œõôø(€€€€€€€€€€€€€€ø(€€€€€€€€€€€€€€€€ñA…±•ÑÑ”Í¥é”õìÄÅô€¼ø(€€€€€€€€€€€€€€€	É…¹(€€€€€€€€€€€€€€ð½‰ÕÑÑ½¸ø(€€€€€€€€€€€€€€ñ‰ÕÑÑ½¸(€€€€€€€€€€€€€€€½¹±¥¬õì ¤€ôøÍ•ÑM¡½ÝÉµA…¹•°¡ÑÉÕ”¥ô(€€€€€€€€€€€€€€€±…ÍÍ9…µ”ô‰™±•à¥Ñ•µÌµ•¹Ñ•È…À´Ä¸ÔÁà´È¸ÔÁä´ÄÉ½Õ¹‘•µ±œÑ•áÐµáÌ™½¹ÐµÍ•µ¥‰½±ÑÉ…¹Í¥Ñ¥½¸µ…±°ˆ(€€€€€€€€€€€€€€€ÍÑå±”õíì‰…­É½Õ¹è€É‰„ ÈÄÜ°ÄÄä°Ø°À¸Ä¤œ°½±½Èè€œäÜÜÀØœ°‰½É‘•Èè€œÅÁàÍ½±¥É‰„ ÈÄÜ°ÄÄä°Ø°À¸È¤œõô(€€€€€€€€€€€€€€ø(€€€€€€€€€€€€€€€€ñ]•‰¡½½¬Í¥é”õìÄÅô€¼ø(€€€€€€€€€€€€€€€I4(€€€€€€€€€€€€€€ð½‰ÕÑÑ½¸ø(€€€€€€€€€€€€€€ñ‘¥Ø±…ÍÍ9…µ”ô‰Ñ•áÐµáÌ™½¹Ðµµ½¹¼ˆÍÑå±”õíì½±½Èè€œŒÙÜÈàÀœõôø(€€€€€€€€€€€€€€€í…Í•%‘ôƒ
-ÜØÄ¸Ø¸Ä(€€€€€€€€€€€€€€ð½‘¥Øø(€€€€€€€€€€€€ð½‘¥Øø(€€€€€€€€€€ð½‘¥Øø((€€€€€€€€€ì¼¨1¥Ù”…Í­¥¹œÁÉ¥”Í±¥‘•È€¨½ô(€€€€€€€€€€ñ‘¥Ø±…ÍÍ9…µ”ô‰µˆ´ÐÉ½Õ¹‘•µá°À´ÐˆÍÑå±”õíì‰…­É½Õ¹è€œœ°‰½É‘•Èè€œÅÁàÍ½±¥€ÑÉœõôø(€€€€€€€€€€€€ñ‘¥Ø±…ÍÍ9…µ”ô‰™±•à¥Ñ•µÌµ•¹Ñ•È©ÕÍÑ¥™äµ‰•ÑÝ••¸µˆ´Èˆø(€€€€€€€€€€€€€€ñÍÁ…¸ÍÑå±”õíì™½¹ÑM¥é”è€œÄÁÁàœ°™½¹Ñ]•¥¡Ðè€ØÀÀ°±•ÑÑ•ÉMÁ…¥¹œè€œÀ¸Å•´œ°Ñ•áÑQÉ…¹Í™½É´è€ÕÁÁ•É…Í”œ°½±½Èè€œŒÙÜÈàÀœ°™½¹Ñ…µ¥±äè€Ù…È ´µ™½¹Ðµµ½¹¼¤œõôø(€€€€€€€€€€€€€€€1¥Ù”Í­¥¹œAÉ¥”(€€€€€€€€€€€€€€ð½ÍÁ…¸ø(€€€€€€€€€€€€€€ñ‘¥Ø±…ÍÍ9…µ”ô‰™±•à¥Ñ•µÌµ•¹Ñ•È…À´Èˆø(€€€€€€€€€€€€€€€€ñÍÁ…¸±…ÍÍ9…µ”ô‰Ñ•áÐµ±œ™½¹Ðµµ½¹¼™½¹Ðµ‰½±ˆÍÑå±”õíì½±½Èè€œŒÄØÄàÅœõôø(€€€€€€€€€€€€€€€€€€‘í¥¹Ñ…­”¹Ñ…É•ÑAÉ¥”¹Ñ½1½…±•MÑÉ¥¹œ ¥ô(€€€€€€€€€€€€€€€€ð½ÍÁ…¸ø(€€€€€€€€€€€€€€€€ñÍÁ…¸±…ÍÍ9…µ”ô‰Ñ•áÐµÍ´™½¹Ðµµ½¹¼™½¹ÐµÍ•µ¥‰½±ˆÍÑå±”õíì½±½Èè½Ù•ÉÁÉ¥•AÐ€ø€À€ü€œäÜÜÀØœ€è€œŒÁäÐààœõôø(€€€€€€€€€€€€€€€€€í½Ù•ÉÁÉ¥•AÐ€ø€À€ü€œ¬œ€è€œõí½Ù•ÉÁÉ¥•AÐ¹Ñ½¥á• Ä¥ô”(€€€€€€€€€€€€€€€€ð½ÍÁ…¸ø(€€€€€€€€€€€€€€ð½‘¥Øø(€€€€€€€€€€€€ð½‘¥Øø(€€€€€€€€€€€€ñ¥¹ÁÕÐ(€€€€€€€€€€€€€ÑåÁ”ô‰É…¹”ˆ(€€€€€€€€€€€€€µ¥¸õí¥¹Ñ…­”¹‰…Í•±¥¹•Y…±Õ”€¨€À¸åô(€€€€€€€€€€€€€µ…àõí¥¹Ñ…­”¹‰…Í•±¥¹•Y…±Õ”€¨€Ä¸ÈÕô(€€€€€€€€€€€€€ÍÑ•ÀõìÔÀÀÁô(€€€€€€€€€€€€€Ù…±Õ”õí¥¹Ñ…­”¹Ñ…É•ÑAÉ¥•ô(€€€€€€€€€€€€€½¹¡…¹”õí”€ôøì(€€€€€€€€€€€€€€€½¹ÍÐ¹•Ý%¹Ñ…­”€ôì€¸¸¹¥¹Ñ…­”°Ñ…É•ÑAÉ¥”è9Õµ‰•È¡”¹Ñ…É•Ð¹Ù…±Õ”¤ôì(€€€€€€€€€€€€€€€É•½µÁÕÑ”¡¹•Ý%¹Ñ…­”¤ì(€€€€€€€€€€€€€€€‰É½…‘…ÍÑMÑ…Ñ”¡ÑÉÕ”¤ì(€€€€€€€€€€€€€€€Í•Ñ%ÍÉ…¥¹œ¡ÑÉÕ”¤ì(€€€€€€€€€€€€€õô(€€€€€€€€€€€€€½¹5½ÕÍ•UÀõì ¤€ôøì‰É½…‘…ÍÑMÑ…Ñ”¡™…±Í”¤ìÍ•Ñ%ÍÉ…¥¹œ¡™…±Í”¤ìõô(€€€€€€€€€€€€€½¹Q½Õ¡¹õì ¤€ôøì‰É½…‘…ÍÑMÑ…Ñ”¡™…±Í”¤ìÍ•Ñ%ÍÉ…¥¹œ¡™…±Í”¤ìõô(€€€€€€€€€€€€€±…ÍÍ9…µ”ô‰Üµ™Õ±°ˆ(€€€€€€€€€€€€€ÍÑå±”õíì…•¹Ñ½±½Èè€œŒÈÔØÍœõô(€€€€€€€€€€€€¼ø(€€€€€€€€€€€€ñ‘¥Ø±…ÍÍ9…µ”ô‰™±•à©ÕÍÑ¥™äµ‰•ÑÝ••¸Ñ•áÐµáÌ™½¹Ðµµ½¹¼µÐ´ÄˆÍÑå±”õíì½±½Èè€œŒÙÜÈàÀœõôø(€€€€€€€€€€€€€€ñÍÁ…¸ø‘ì¡¥¹Ñ…­”¹‰…Í•±¥¹•Y…±Õ”€¨€À¸ä¤¹Ñ½1½…±•MÑÉ¥¹œ ¥ôð½ÍÁ…¸ø(€€€€€€€€€€€€€€ñÍÁ…¸ù‰…Í•±¥¹”€‘í¥¹Ñ…­”¹‰…Í•±¥¹•Y…±Õ”¹Ñ½1½…±•MÑÉ¥¹œ ¥ôð½ÍÁ…¸ø(€€€€€€€€€€€€€€ñÍÁ…¸ø‘ì¡¥¹Ñ…­”¹‰…Í•±¥¹•Y…±Õ”€¨€Ä¸ÈÔ¤¹Ñ½1½…±•MÑÉ¥¹œ ¥ôð½ÍÁ…¸ø(€€€€€€€€€€€€ð½‘¥Øø(€€€€€€€€€€ð½‘¥Øø((€€€€€€€€€ì¼¨-A$5…ÑÉ¥à€¨½ô(€€€€€€€€€€ñ-Á¥5…ÑÉ¥à½µÁÕÑ•õí½µÁÕÑ•‘ô¥¹Ñ…­”õí¥¹Ñ…­•ô¥ÍÉ…¥¹œõí¥ÍÉ…¥¹ô€¼ø((€€€€€€€€€ì¼¨MÕÉÙ¥Ù…°ÕÉÙ”€¨½ô(€€€€€€€€€€ñ‘¥Ø±…ÍÍ9…µ”ô‰µÐ´ÐÉ½Õ¹‘•µá°À´ÐˆÍÑå±”õíì‰…­É½Õ¹è€œœ°‰½É‘•Èè€œÅÁàÍ½±¥€ÑÉœõôø(€€€€€€€€€€€€ñ‘¥Ø±…ÍÍ9…µ”ô‰™±•à¥Ñ•µÌµ•¹Ñ•È©ÕÍÑ¥™äµ‰•ÑÝ••¸µˆ´Ìˆø(€€€€€€€€€€€€€€ñ‘¥Ø±…ÍÍ9…µ”ô‰™±•à¥Ñ•µÌµ•¹Ñ•È…À´Èˆø(€€€€€€€€€€€€€€€€ñÍÁ…¸±…ÍÍ9…µ”ô‰Ñ•áÐµÍ´™½¹ÐµÍ•µ¥‰½±ˆÍÑå±”õíì½±½Èè€œŒÄØÄàÅœõôø(€€€€€€€€€€€€€€€€€Q¥µ”µ]…ÉÁ•MÕÉÙ¥Ù…°ÕÉÙ”(€€€€€€€€€€€€€€€€ð½ÍÁ…¸ø(€€€€€€€€€€€€€€€€ñÍÁ…¸±…ÍÍ9…µ”ô‰‰…‘”µ™ÜˆûŠ^<\ð½ÍÁ…¸ø(€€€€€€€€€€€€€€ð½‘¥Øø(€€€€€€€€€€€€€€ñ‘¥Ø±…ÍÍ9…µ”ô‰™±•à¥Ñ•µÌµ•¹Ñ•È…À´ÌÑ•áÐµáÌ™½¹Ðµµ½¹¼ˆÍÑå±”õíì½±½Èè€œŒÙÜÈàÀœõôø(€€€€€€€€€€€€€€€€ñÍÁ…¸û:é}Ð€ôí½µÁÕÑ•¹­…ÁÁ…P¹Ñ½¥á• Ì¥ôð½ÍÁ…¸ø(€€€€€€€€€€€€€€€€ñÍÁ…¸û:é}•™˜€ôí½µÁÕÑ•¹­…ÁÁ…™˜¹Ñ½¥á• Ì¥ôð½ÍÁ…¸ø(€€€€€€€€€€€€€€€€ñÍÁ…¸ùÕ}•™˜€ôì¡½µÁÕÑ•¹Õ™˜€¨€ÄÀÀ¤¹Ñ½¥á• Ä¥ô”ð½ÍÁ…¸ø(€€€€€€€€€€€€€€ð½‘¥Øø(€€€€€€€€€€€€ð½‘¥Øø(€€€€€€€€€€€€ñMÕÉÙ¥Ù…±ÕÉÙ•¡…ÉÐ(€€€€€€€€€€€€€ÕÉÙ”õí½µÁÕÑ•¹ÍÕÉÙ¥Ù…±ÕÉÙ•ô(€€€€€€€€€€€€€ÀÔÁ½´õí½µÁÕÑ•¹ÀÔÁ½µô(€€€€€€€€€€€€€•áÁ•Ñ•‘½´õí½µÁÕÑ•¹•áÁ•Ñ•‘½µô(€€€€€€€€€€€€€…ÑÕ…±½´õí¥¹Ñ…­”¹…ÑÕ…±½µô(€€€€€€€€€€€€¼ø(€€€€€€€€€€ð½‘¥Øø((€€€€€€€€€ì¼¨A•ÉÍ½¹„¥…¹½ÍÑ¥ŒA…¹•°€¨½ô(€€€€€€€€€€ñ‘¥Ø±…ÍÍ9…µ”ô‰µÐ´Ðˆø(€€€€€€€€€€€€ñA•ÉÍ½¹…Q…‰Ì(€€€€€€€€€€€€€…Ñ¥Ù•A•ÉÍ½¹„õí…Ñ¥Ù•A•ÉÍ½¹…ô(€€€€€€€€€€€€€¥¹Ñ…­”õí¥¹Ñ…­•ô(€€€€€€€€€€€€€½µÁÕÑ•õí½µÁÕÑ•‘ô(€€€€€€€€€€€€€±¥ÍÑ¥¹•¹Ðõí±¥ÍÑ¥¹•¹Ñô(€€€€€€€€€€€€€±•¹‘•Èõí±•¹‘•É=ÕÑô(€€€€€€€€€€€€€¥¹Ù•ÍÑ½Èõí¥¹Ù•ÍÑ½É=ÕÑô(€€€€€€€€€€€€€½µµ•É¥…°õí½µµ•É¥…±=ÕÑô(€€€€€€€€€€€€¼ø(€€€€€€€€€€ð½‘¥Øø(€€€€€€€€ð½µ…¥¸ø((€€€€€€€ì¼¨ƒŠRŠR I%!PI%0ƒŠPÕ‘¥Ð1½œƒŠRŠR €¨½ô(€€€€€€€€ñ…Í¥‘”(€€€€€€€€€±…ÍÍ9…µ”ô‰Ü´ÜÈ™±•àµÍ¡É¥¹¬´À½Ù•É™±½Üµäµ…ÕÑ¼±¥¡ÐµÍÉ½±°ˆ(€€€€€€€€€ÍÑå±”õíì‰…­É½Õ¹è€œœ°‰½É‘•É1•™Ðè€œÅÁàÍ½±¥€ÑÉœõô(€€€€€€€€ø(€€€€€€€€€€ñÕ‘¥ÑI…¥°½µÁÕÑ•õí½µÁÕÑ•‘ô¥¹Ñ…­”õí¥¹Ñ…­•ô½¹½Áå)Í½¸õí¡…¹‘±•½Áå)Í½¹ô€¼ø(€€€€€€€€ð½…Í¥‘”ø(€€€€€€ð½‘¥Øø((€€€€€íÍ¡½ÝM•¹…É¥½1¥‰É…Éä€˜˜€ (€€€€€€€€ñM•¹…É¥½1¥‰É…Éä½¹±½Í”õì ¤€ôøÍ•ÑM¡½ÝM•¹…É¥½1¥‰É…Éä¡™…±Í”¥ô€¼ø(€€€€€€¥ô((€€€€€ì¼¨A¡…Í”€ÄèM¡…É”µ½‘…°€¨½ô(€€€€€íÍ¡½ÝM¡…É•5½‘…°€˜˜€ (€€€€€€€€ñM¡…É•M•¹…É¥½5½‘…°(€€€€€€€€€Á…å±½…õí•ÑM•¹…É¥½A…å±½… ¥ô(€€€€€€€€€½¹±½Í”õì ¤€ôøÍ•ÑM¡½ÝM¡…É•5½‘…°¡™…±Í”¥ô(€€€€€€€€¼ø(€€€€€€¥ô((€€€€€ì¼¨A¡…Í”€Èè	É…¹Ñ¡•µ”Á…¹•°€¨½ô(€€€€€íÍ¡½Ý	É…¹‘Q¡•µ”€˜˜€ (€€€€€€€€ñ	É…¹‘Q¡•µ•A…¹•°(€€€€€€€€€½¹±½Í”õì ¤€ôøÍ•ÑM¡½Ý	É…¹‘Q¡•µ”¡™…±Í”¥ô(€€€€€€€€€½¹M…Ù”õì ¤€ôøÍ•ÑM¡½Ý	É…¹‘Q¡•µ”¡™…±Í”¥ô(€€€€€€€€¼ø(€€€€€€¥ô((€€€€€ì¼¨A¡…Í”€ÔèI4Ý•‰¡½½¬Á…¹•°€¨½ô(€€€€€íÍ¡½ÝÉµA…¹•°€˜˜€ (€€€€€€€€ñÉµ]•‰¡½½­A…¹•°(€€€€€€€€€½¹±½Í”õì ¤€ôøÍ•ÑM¡½ÝÉµA…¹•°¡™…±Í”¥ô(€€€€€€€€€Í•¹…É¥½A…å±½…õí•ÑM•¹…É¥½A…å±½… ¥ô(€€€€€€€€¼ø(€€€€€€¥ô((€€€€€ì¼¨5M!…é…É1¥µ¥Ñ…Ñ¥½¸¥Í±½ÍÕÉ”€¨½ô(€€€€€€ñ‘¥Ø(€€€€€€€±…ÍÍ9…µ”ô‰™±•àµÍ¡É¥¹¬´ÀÁà´ØÁä´ÈÑ•áÐµ•¹Ñ•Èˆ(€€€€€€€ÍÑå±”õíì‰…­É½Õ¹è€œœ°‰½É‘•ÉQ½Àè€œÅÁàÍ½±¥€ÑÉœõô(€€€€€€ø(€€€€€€€€ñÀÍÑå±”õíì™½¹ÑM¥é”è€œÄÁÁàœ°½±½Èè€œŒåÍœ°™½¹Ñ…µ¥±äè€Ù…È ´µ™½¹Ðµµ½¹¼¤œ°±¥¹•!•¥¡Ðè€Ä¸Ôõôø(€€€€€€€€€	…Í•±¥¹”¡…é…ÉÕÉÙ”…±¥‰É…Ñ•Ñ¼¹…Ñ¥½¹…°Á…ÑÑ•É¹Ì¸1½…°ÍÕ‰µ…É­•Ð™É¥Ñ¥½¸…±¥‰É…Ñ•Ù¥„ÕÍ•ÈµÍÕÁÁ±¥•±½Í•µ•‘¥…¸‘…Ñ„¸(€€€€€€€€ð½Àø(€€€€€€ð½‘¥Øø(€€€€ð½‘¥Øø(€€¤ì)ô
+                className="flex items-center gap-1.5 px-2.5 py-1 rounded-lg text-xs font-semibold transition-all"
+                style={{ background: 'rgba(13,148,136,0.1)', color: '#0D9488', border: '1px solid rgba(13,148,136,0.2)' }}
+              >
+                <Palette size={11} />
+                Brand
+              </button>
+              <button
+                onClick={() => setShowCrmPanel(true)}
+                className="flex items-center gap-1.5 px-2.5 py-1 rounded-lg text-xs font-semibold transition-all"
+                style={{ background: 'rgba(217,119,6,0.1)', color: '#D97706', border: '1px solid rgba(217,119,6,0.2)' }}
+              >
+                <Webhook size={11} />
+                CRM
+              </button>
+              <div className="text-xs font-mono" style={{ color: '#6B7280' }}>
+                {caseId} Â· v1.6.1
+              </div>
+            </div>
+          </div>
+
+          {/* Live asking price slider */}
+          <div className="mb-4 rounded-xl p-4" style={{ background: '#FFFFFF', border: '1px solid #E4E2DC' }}>
+            <div className="flex items-center justify-between mb-2">
+              <span style={{ fontSize: '10px', fontWeight: 600, letterSpacing: '0.1em', textTransform: 'uppercase', color: '#6B7280', fontFamily: 'var(--font-mono)' }}>
+                Live Asking Price
+              </span>
+              <div className="flex items-center gap-2">
+                <span className="text-lg font-mono font-bold" style={{ color: '#16181D' }}>
+                  ${intake.targetPrice.toLocaleString()}
+                </span>
+                <span className="text-sm font-mono font-semibold" style={{ color: overpricePct > 0 ? '#D97706' : '#0D9488' }}>
+                  {overpricePct > 0 ? '+' : ''}{overpricePct.toFixed(1)}%
+                </span>
+              </div>
+            </div>
+            <input
+              type="range"
+              min={intake.baselineValue * 0.9}
+              max={intake.baselineValue * 1.25}
+              step={5000}
+              value={intake.targetPrice}
+              onChange={e => {
+                const newIntake = { ...intake, targetPrice: Number(e.target.value) };
+                recompute(newIntake);
+                broadcastState(true);
+                setIsDragging(true);
+              }}
+              onMouseUp={() => { broadcastState(false); setIsDragging(false); }}
+              onTouchEnd={() => { broadcastState(false); setIsDragging(false); }}
+              className="w-full"
+              style={{ accentColor: '#2563EB' }}
+            />
+            <div className="flex justify-between text-xs font-mono mt-1" style={{ color: '#6B7280' }}>
+              <span>${(intake.baselineValue * 0.9).toLocaleString()}</span>
+              <span>baseline ${intake.baselineValue.toLocaleString()}</span>
+              <span>${(intake.baselineValue * 1.25).toLocaleString()}</span>
+            </div>
+          </div>
+
+          {/* KPI Matrix */}
+          <KpiMatrix computed={computed} intake={intake} isDragging={isDragging} />
+
+          {/* Survival Curve */}
+          <div className="mt-4 rounded-xl p-4" style={{ background: '#FFFFFF', border: '1px solid #E4E2DC' }}>
+            <div className="flex items-center justify-between mb-3">
+              <div className="flex items-center gap-2">
+                <span className="text-sm font-semibold" style={{ color: '#16181D' }}>
+                  Time-Warped Survival Curve
+                </span>
+                <span className="badge-fw">â— FW</span>
+              </div>
+              <div className="flex items-center gap-3 text-xs font-mono" style={{ color: '#6B7280' }}>
+                <span>Îº_t = {computed.kappaT.toFixed(3)}</span>
+                <span>Îº_eff = {computed.kappaEff.toFixed(3)}</span>
+                <span>u_eff = {(computed.uEff * 100).toFixed(1)}%</span>
+              </div>
+            </div>
+            <SurvivalCurveChart
+              curve={computed.survivalCurve}
+              p50Dom={computed.p50Dom}
+              expectedDom={computed.expectedDom}
+              actualDom={intake.actualDom}
+            />
+          </div>
+
+          {/* Persona Diagnostic Panel */}
+          <div className="mt-4">
+            <PersonaTabs
+              activePersona={activePersona}
+              intake={intake}
+              computed={computed}
+              listingAgent={listingAgent}
+              lender={lenderOut}
+              investor={investorOut}
+              commercial={commercialOut}
+            />
+          </div>
+        </main>
+
+        {/* â”€â”€ RIGHT RAIL â€” Audit Log â”€â”€ */}
+        <aside
+          className="w-72 flex-shrink-0 overflow-y-auto light-scroll"
+          style={{ background: '#FFFFFF', borderLeft: '1px solid #E4E2DC' }}
+        >
+          <AuditRail computed={computed} intake={intake} onCopyJson={handleCopyJson} />
+        </aside>
+      </div>
+
+      {showScenarioLibrary && (
+        <ScenarioLibrary onClose={() => setShowScenarioLibrary(false)} />
+      )}
+
+      {/* Phase 1: Share modal */}
+      {showShareModal && (
+        <ShareScenarioModal
+          payload={getScenarioPayload()}
+          onClose={() => setShowShareModal(false)}
+        />
+      )}
+
+      {/* Phase 2: Brand theme panel */}
+      {showBrandTheme && (
+        <BrandThemePanel
+          onClose={() => setShowBrandTheme(false)}
+          onSave={() => setShowBrandTheme(false)}
+        />
+      )}
+
+      {/* Phase 5: CRM webhook panel */}
+      {showCrmPanel && (
+        <CrmWebhookPanel
+          onClose={() => setShowCrmPanel(false)}
+          scenarioPayload={getScenarioPayload()}
+        />
+      )}
+
+      {/* MSA Hazard Limitation Disclosure */}
+      <div
+        className="flex-shrink-0 px-6 py-2 text-center"
+        style={{ background: '#FFFFFF', borderTop: '1px solid #E4E2DC' }}
+      >
+        <p style={{ fontSize: '10px', color: '#9CA3AF', fontFamily: 'var(--font-mono)', lineHeight: 1.5 }}>
+          Baseline hazard curve calibrated to national patterns. Local submarket friction calibrated via user-supplied closed median data.
+        </p>
+      </div>
+    </div>
+  );
+}
