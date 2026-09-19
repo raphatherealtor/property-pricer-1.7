@@ -1,0 +1,358 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap');
+
+:root {
+  /* Canvas & Panels (Desk Mode - LIGHT) */
+  --paper: #FAFAF8;
+  --panel: #FFFFFF;
+  --ink: #16181D;
+  --ink-2: #3F4550;
+  --line: #E4E2DC;
+  --line-2: #D3D0C8;
+
+  /* Screen Mode (Dark Canvas) */
+  --dark: #0B1220;
+  --dark-panel: #111A2E;
+  --dark-line: #22304A;
+  --dark-ink: #E8EDF7;
+  --dark-muted: #8FA1C0;
+
+  /* Semantic Accents */
+  --blue: #2563EB;
+  --blue-soft: #EFF4FE;
+  --amber: #D97706;
+  --amber-soft: #FDF3E3;
+  --red: #DC2626;
+  --red-soft: #FDECEC;
+  --teal: #0D9488;
+  --teal-soft: #E6F4F2;
+  --gray: #6B7280;
+  --gray-soft: #F3F4F6;
+
+  --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --font-mono: 'JetBrains Mono', 'SF Mono', 'Cascadia Code', Consolas, monospace;
+
+  --radius: 10px;
+  --radius-lg: 16px;
+  --grid-unit: 8px;
+
+  /* Desk mode uses light theme */
+  --background: var(--paper);
+  --foreground: var(--ink);
+  --card: var(--panel);
+  --card-foreground: var(--ink);
+  --primary: var(--blue);
+  --primary-foreground: #FFFFFF;
+  --secondary: #F5F4F0;
+  --secondary-foreground: var(--ink-2);
+  --muted: #F5F4F0;
+  --muted-foreground: var(--ink-2);
+  --accent: var(--teal);
+  --accent-foreground: #FFFFFF;
+  --border: var(--line);
+  --input: #FFFFFF;
+  --ring: var(--blue);
+  --radius: 10px;
+  --radius-lg: 16px;
+}
+
+@layer base {
+  * {
+    box-sizing: border-box;
+  }
+  body {
+    background-color: var(--paper);
+    color: var(--ink);
+    font-family: var(--font-sans);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+  html {
+    scroll-behavior: smooth;
+  }
+  h1, h2, h3, h4, h5, h6, p {
+    margin: 0;
+  }
+}
+
+@layer utilities {
+  .font-mono {
+    font-family: var(--font-mono);
+  }
+  .text-2xs {
+    font-size: 10px;
+    line-height: 1.4;
+  }
+  .text-ink { color: var(--ink); }
+  .text-ink-2 { color: var(--ink-2); }
+  .bg-paper { background-color: var(--paper); }
+  .bg-panel { background-color: var(--panel); }
+  .border-line { border-color: var(--line); }
+  .border-line-2 { border-color: var(--line-2); }
+  .text-dark-ink { color: var(--dark-ink); }
+  .text-dark-muted { color: var(--dark-muted); }
+  .bg-dark { background-color: var(--dark); }
+  .bg-dark-panel { background-color: var(--dark-panel); }
+  .border-dark-line { border-color: var(--dark-line); }
+
+  .badge-fw {
+    display: inline-flex;
+    align-items: center;
+    gap: 3px;
+    font-size: 10px;
+    font-family: var(--font-mono);
+    font-weight: 600;
+    color: var(--teal);
+    background: rgba(13, 148, 136, 0.10);
+    border: 1px solid rgba(13, 148, 136, 0.25);
+    border-radius: 4px;
+    padding: 1px 5px;
+    letter-spacing: 0.04em;
+  }
+  .badge-ea {
+    display: inline-flex;
+    align-items: center;
+    gap: 3px;
+    font-size: 10px;
+    font-family: var(--font-mono);
+    font-weight: 600;
+    color: var(--gray);
+    background: rgba(107, 114, 128, 0.08);
+    border: 1px dashed rgba(107, 114, 128, 0.35);
+    border-radius: 4px;
+    padding: 1px 5px;
+    letter-spacing: 0.04em;
+  }
+  .kpi-value {
+    font-family: var(--font-mono);
+    font-weight: 700;
+    font-variant-numeric: tabular-nums;
+    font-size: 1.75rem;
+    line-height: 1;
+    letter-spacing: -0.02em;
+  }
+  .kpi-value-lg {
+    font-family: var(--font-mono);
+    font-weight: 700;
+    font-variant-numeric: tabular-nums;
+    font-size: 2.25rem;
+    line-height: 1;
+    letter-spacing: -0.02em;
+  }
+  .audit-mono {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    line-height: 1.6;
+    color: var(--dark-muted);
+  }
+  .slide-transition {
+    transition: transform 400ms cubic-bezier(0.4, 0, 0.2, 1), opacity 300ms ease;
+  }
+  .metric-highlight {
+    animation: metricPulse 600ms ease-out;
+  }
+  .consumer-bg {
+    background: #FAFAF8;
+    min-height: 100vh;
+  }
+  .dark-scroll::-webkit-scrollbar {
+    width: 4px;
+  }
+  .dark-scroll::-webkit-scrollbar-track {
+    background: transparent;
+  }
+  .dark-scroll::-webkit-scrollbar-thumb {
+    background: var(--dark-line);
+    border-radius: 2px;
+  }
+  .light-scroll::-webkit-scrollbar {
+    width: 4px;
+  }
+  .light-scroll::-webkit-scrollbar-track {
+    background: transparent;
+  }
+  .light-scroll::-webkit-scrollbar-thumb {
+    background: var(--line-2);
+    border-radius: 2px;
+  }
+}
+
+@layer components {
+  /* DESK MODE - Light theme inputs */
+  .desk-input {
+    width: 100%;
+    background: #FFFFFF;
+    border: 1px solid var(--line);
+    border-radius: 8px;
+    padding: 8px 12px;
+    color: var(--ink);
+    font-family: var(--font-mono);
+    font-size: 13px;
+    font-variant-numeric: tabular-nums;
+    transition: border-color 150ms ease, box-shadow 150ms ease;
+    outline: none;
+  }
+  .desk-input:focus {
+    border-color: var(--blue);
+    box-shadow: 0 0 0 2px rgba(37, 99, 235, 0.12);
+  }
+  .desk-input::placeholder {
+    color: var(--gray);
+  }
+  .desk-label {
+    display: block;
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--ink-2);
+    margin-bottom: 4px;
+  }
+  .desk-card {
+    background: #FFFFFF;
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    padding: 16px;
+  }
+  .btn-primary {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 8px 16px;
+    background: var(--ink);
+    color: #FFFFFF;
+    border: none;
+    border-radius: 8px;
+    font-size: 13px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 150ms ease;
+  }
+  .btn-primary:hover {
+    background: #2a2d35;
+    transform: translateY(-1px);
+  }
+  .btn-primary:active {
+    transform: scale(0.97);
+  }
+  .btn-secondary {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 8px 16px;
+    background: #FFFFFF;
+    color: var(--ink);
+    border: 1px solid var(--line);
+    border-radius: 8px;
+    font-size: 13px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 150ms ease;
+  }
+  .btn-secondary:hover {
+    background: var(--gray-soft);
+    border-color: var(--line-2);
+  }
+  .btn-secondary:active {
+    transform: scale(0.97);
+  }
+  .persona-tab {
+    padding: 8px 16px;
+    font-size: 12px;
+    font-weight: 600;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 150ms ease;
+    border: 1px solid transparent;
+    white-space: nowrap;
+    color: var(--ink-2);
+    background: transparent;
+  }
+  .persona-tab:hover {
+    background: var(--gray-soft);
+    color: var(--ink);
+  }
+  .persona-tab.active {
+    background: var(--ink);
+    color: #FFFFFF;
+    border-color: var(--ink);
+  }
+  .consumer-label {
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--ink);
+  }
+
+  /* Desk flags */
+  .flag-warning {
+    display: flex;
+    align-items: flex-start;
+    gap: 6px;
+    padding: 8px 10px;
+    border-radius: 6px;
+    font-size: 11px;
+    font-family: var(--font-mono);
+    background: rgba(217, 119, 6, 0.08);
+    border: 1px solid rgba(217, 119, 6, 0.25);
+    color: #92400E;
+  }
+  .flag-ok {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding: 6px 10px;
+    border-radius: 6px;
+    font-size: 11px;
+    font-family: var(--font-mono);
+    background: rgba(13, 148, 136, 0.08);
+    border: 1px solid rgba(13, 148, 136, 0.2);
+    color: #065F46;
+  }
+  .flag-error {
+    display: flex;
+    align-items: flex-start;
+    gap: 6px;
+    padding: 8px 10px;
+    border-radius: 6px;
+    font-size: 11px;
+    font-family: var(--font-mono);
+    background: rgba(220, 38, 38, 0.08);
+    border: 1px solid rgba(220, 38, 38, 0.2);
+    color: #991B1B;
+  }
+
+  /* Screen/Deck dark mode overrides */
+  .screen-mode .desk-input {
+    background: var(--dark-panel);
+    border-color: var(--dark-line);
+    color: var(--dark-ink);
+  }
+  .screen-mode .desk-input::placeholder {
+    color: var(--dark-muted);
+  }
+}
+
+@keyframes metricPulse {
+  0% { opacity: 0.5; transform: scale(0.97); }
+  100% { opacity: 1; transform: scale(1); }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(4px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* Screen/Deck mode - dark canvas */
+.mode-screen {
+  background: var(--dark) !important;
+  color: var(--dark-ink) !important;
+}
+
+/* Consumer mode - clean white */
+.mode-consumer {
+  background: var(--paper) !important;
+  color: var(--ink) !important;
+}
