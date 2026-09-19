@@ -1,0 +1,50 @@
+name: Import Property Pricer 1.7 Snapshot
+
+on:
+  push:
+    paths:
+      - '.snapshot-import/READY'
+
+permissions:
+  contents: write
+
+jobs:
+  import-snapshot:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Reconstruct snapshot archive
+        shell: bash
+        run: |
+          set -euo pipefail
+          cat .snapshot-import/chunk-* | base64 --decode > /tmp/property-pricer-1.7.zip
+          mkdir -p /tmp/property-pricer-import
+          unzip -q /tmp/property-pricer-1.7.zip -d /tmp/property-pricer-import
+
+      - name: Replace repository working tree with snapshot
+        shell: bash
+        run: |
+          set -euo pipefail
+          find . -mindepth 1 -maxdepth 1 ! -name '.git' ! -name '.github' ! -name '.snapshot-import' -exec rm -rf {} +
+          cp -a /tmp/property-pricer-import/. .
+          rm -rf .snapshot-import
+          rm -f .github/workflows/import-property-pricer-snapshot.yml
+          rmdir .github/workflows 2>/dev/null || true
+          rmdir .github 2>/dev/null || true
+
+      - name: Commit exact snapshot
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -A
+          if git diff --cached --quiet; then
+            echo "No changes to commit."
+            exit 0
+          fi
+          git commit -m "Import Property Pricer 1.7 passing snapshot (141/141)"
+          git push
